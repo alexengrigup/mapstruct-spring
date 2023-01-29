@@ -16,6 +16,17 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('mapstructVersion', '1.5.3.Final')
+    set('mapstructLombokVersion', '0.2.0')
+}
+
+dependencies {
+    api "org.mapstruct:mapstruct:${mapstructVersion}"
+    api "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    api "org.projectlombok:lombok-mapstruct-binding:${mapstructLombokVersion}"
+}
+
 test {
     useJUnitPlatform()
 }
