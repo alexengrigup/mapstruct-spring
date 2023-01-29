@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'dev.alexengrig.sample'
+version = '0-DEMO'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    // There is your mapstruct-spring
+    maven {
+        def repoUrl = System.getenv('YOUR_REPO_URL')
+        url = "${repoUrl}/repository/prefix/for/all/maven/dependencies"
+        credentials {
+            username = System.getenv('YOUR_REPO_USERNAME')
+            password = System.getenv('YOUR_REPO_PASSWORD')
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'dev.alexengrig.sample:mapstruct-spring'
+    annotationProcessor 'dev.alexengrig.sample:mapstruct-spring'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
