@@ -1,7 +1,10 @@
 package dev.alexengrig.mapstruct.spring.demo;
 
+import dev.alexengrig.mapstruct.spring.demo.domain.BaseTransport;
 import dev.alexengrig.mapstruct.spring.demo.domain.User;
+import dev.alexengrig.mapstruct.spring.demo.dto.PersonalTransportRequest;
 import dev.alexengrig.mapstruct.spring.demo.dto.UserDto;
+import dev.alexengrig.mapstruct.spring.demo.mapper.BaseTransportRequestMapper;
 import dev.alexengrig.mapstruct.spring.demo.mapper.UserResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +16,8 @@ public class DemoApplication implements CommandLineRunner {
 
     @Autowired
     UserResponseMapper userResponseMapper;
+    @Autowired
+    BaseTransportRequestMapper transportRequestMapper;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -27,6 +32,16 @@ public class DemoApplication implements CommandLineRunner {
         System.out.println(user);
         UserDto dto = userResponseMapper.mapDomainToResponse(user);
         System.out.println(dto);
+
+        PersonalTransportRequest request = PersonalTransportRequest.builder()
+                .id(1L)
+                .name("Car")
+                .type("PERSONAL")
+                .ownerId(1L)
+                .build();
+        System.out.println(request);
+        BaseTransport domain = transportRequestMapper.mapRequestToDomain(request);
+        System.out.println(domain);
     }
 
 }
