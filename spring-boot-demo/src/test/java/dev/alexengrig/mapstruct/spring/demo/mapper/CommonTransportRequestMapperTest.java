@@ -10,26 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class CommonTransportRequestMapperTest {
-
-    static CommonTransportRequest createRequest() {
-        return CommonTransportRequest.builder()
-                .id(1L)
+    @Test
+    void should_map(@Autowired CommonTransportRequestMapper mapper) {
+        CommonTransportRequest request = CommonTransportRequest.builder()
+                .id(10L)
                 .name("Test-name")
                 .type("COMMON")
                 .code("121E")
                 .build();
-    }
-
-    static void assertDomain(CommonTransportRequest request, CommonTransport domain) {
+        CommonTransport domain = mapper.mapRequestToDomain(request);
         assertEquals(request.getId(), domain.getId(), "Id");
         assertEquals(request.getName(), domain.getName(), "Name");
         assertEquals(request.getCode(), domain.getCode(), "Code");
-    }
-
-    @Test
-    void should_map(@Autowired CommonTransportRequestMapper mapper) {
-        CommonTransportRequest request = createRequest();
-        CommonTransport domain = mapper.mapRequestToDomain(request);
-        assertDomain(request, domain);
     }
 }

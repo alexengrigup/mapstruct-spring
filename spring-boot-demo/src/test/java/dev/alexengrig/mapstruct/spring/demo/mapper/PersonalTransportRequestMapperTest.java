@@ -1,29 +1,34 @@
 package dev.alexengrig.mapstruct.spring.demo.mapper;
 
+import dev.alexengrig.mapstruct.spring.demo.converter.FakeUserIdConverter;
 import dev.alexengrig.mapstruct.spring.demo.domain.PersonalTransport;
 import dev.alexengrig.mapstruct.spring.demo.domain.User;
 import dev.alexengrig.mapstruct.spring.demo.dto.PersonalTransportRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
-@SpringBootTest
+@SpringBootTest(classes = {
+        PersonalTransportRequestMapperTest.Config.class,
+        MapStructPersonalTransportRequestMapper.class
+})
 class PersonalTransportRequestMapperTest {
+    static final String OWNER_NAME = "Test-username";
 
-    static PersonalTransportRequest createRequest() {
-        return PersonalTransportRequest.builder()
-                .id(1L)
+    @Test
+    void should_map(@Autowired PersonalTransportRequestMapper mapper) {
+        PersonalTransportRequest request = PersonalTransportRequest.builder()
+                .id(100L)
                 .name("Test-name")
                 .type("PERSONAL")
-                .ownerId(1L)
+                .ownerId(200L)
                 .build();
-    }
-
-    static void assertDomain(PersonalTransportRequest request, PersonalTransport domain) {
+        PersonalTransport domain = mapper.mapRequestToDomain(request);
         assertEquals(request.getId(), domain.getId(), "Id");
         assertEquals(request.getName(), domain.getName(), "Name");
         assertNotNull(domain.getTransportType(), "Type");
@@ -31,14 +36,14 @@ class PersonalTransportRequestMapperTest {
         User owner = domain.getOwner();
         assertNotNull(owner, "Owner");
         assertEquals(request.getOwnerId(), owner.getId(), "OwnerId");
-        assertNull(owner.getUsername(), "OwnerUsername");
+        assertEquals(OWNER_NAME, owner.getUsername(), "OwnerUsername");
     }
 
-    @Test
-    void should_map(@Autowired PersonalTransportRequestMapper mapper) {
-        PersonalTransportRequest request = createRequest();
-        PersonalTransport domain = mapper.mapRequestToDomain(request);
-        assertDomain(request, domain);
+    @Configuration
+    static class Config {
+        @Bean
+        FakeUserIdConverter fakeUserIdConverter() {
+            return new FakeUserIdConverter(OWNER_NAME);
+        }
     }
-
 }
