@@ -15,15 +15,6 @@ configurations {
 }
 
 repositories {
-    // There is your mapstruct-spring
-    maven {
-        def repoUrl = System.getenv('YOUR_REPO_URL')
-        url = "${repoUrl}/repository/prefix/for/all/maven/dependencies"
-        credentials {
-            username = System.getenv('YOUR_REPO_USERNAME')
-            password = System.getenv('YOUR_REPO_PASSWORD')
-        }
-    }
     mavenCentral()
 }
 
