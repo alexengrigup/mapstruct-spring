@@ -6,18 +6,17 @@ import dev.alexengrig.mapstruct.spring.demo.dto.PersonalTransportRequest;
 import dev.alexengrig.mapstruct.spring.demo.dto.UserDto;
 import dev.alexengrig.mapstruct.spring.demo.mapper.BaseTransportRequestMapper;
 import dev.alexengrig.mapstruct.spring.demo.mapper.UserResponseMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class DemoApplication implements CommandLineRunner {
 
-    @Autowired
-    UserResponseMapper userResponseMapper;
-    @Autowired
-    BaseTransportRequestMapper transportRequestMapper;
+    private final UserResponseMapper userResponseMapper;
+    private final BaseTransportRequestMapper transportRequestMapper;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
