@@ -6,23 +6,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class CommonTransport extends Transport {
+public class CreatingCommonTransport extends CreatingTransport {
     private String code;
 
     @Builder
-    public CommonTransport(UUID id, String name, String code) {
-        super(id, name);
+    public CreatingCommonTransport(String name, String code) {
+        super(name);
         this.code = code;
-    }
-
-    @Override
-    public TransportType getType() {
-        return TransportType.COMMON;
     }
 }

@@ -1,4 +1,4 @@
-package io.github.alexengrigup.mapstruct.spring.demo.dto;
+package io.github.alexengrigup.mapstruct.spring.demo.domain;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,16 +6,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PersonalTransportRequest extends BaseTransportRequest {
-    private Long ownerId;
+public class CreatingPersonalTransport extends CreatingTransport {
+    private UUID ownerId;
 
     @Builder
-    public PersonalTransportRequest(Long id, String name, String type, Long ownerId) {
-        super(id, name, type);
+    public CreatingPersonalTransport(String name, UUID ownerId) {
+        super(name);
         this.ownerId = ownerId;
     }
 }

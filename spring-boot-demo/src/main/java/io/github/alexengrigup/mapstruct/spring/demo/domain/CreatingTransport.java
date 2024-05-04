@@ -1,4 +1,4 @@
-package io.github.alexengrigup.mapstruct.spring.demo.dto;
+package io.github.alexengrigup.mapstruct.spring.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class BaseTransportRequest {
-    private Long id;
+public abstract class CreatingTransport {
     private String name;
-    private String type;
 }

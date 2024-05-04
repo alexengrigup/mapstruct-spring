@@ -1,4 +1,4 @@
-package io.github.alexengrigup.mapstruct.spring.demo.dto;
+package io.github.alexengrigup.mapstruct.spring.demo.payload;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,16 +6,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class CommonTransportRequest extends BaseTransportRequest {
+public class CommonTransportResponse extends TransportResponse {
     private String code;
 
     @Builder
-    public CommonTransportRequest(Long id, String name, String type, String code) {
-        super(id, name, type);
+    public CommonTransportResponse(UUID id, String name, String code) {
+        super(id, name);
         this.code = code;
     }
 }

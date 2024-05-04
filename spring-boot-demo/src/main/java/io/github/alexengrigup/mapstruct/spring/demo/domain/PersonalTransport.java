@@ -6,21 +6,23 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PersonalTransport extends BaseTransport {
+public class PersonalTransport extends Transport {
     private User owner;
 
     @Builder
-    public PersonalTransport(Long id, String name, User owner) {
+    public PersonalTransport(UUID id, String name, User owner) {
         super(id, name);
         this.owner = owner;
     }
 
     @Override
-    public TransportType getTransportType() {
+    public TransportType getType() {
         return TransportType.PERSONAL;
     }
 }

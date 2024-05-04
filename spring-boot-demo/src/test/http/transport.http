@@ -1,0 +1,26 @@
+### Create user
+POST http://localhost:8080/api/users/tester
+
+> {%
+  client.global.set("userId", response.body);
+%}
+
+### Create personal transport
+POST http://localhost:8080/api/transports
+Content-Type: application/json
+
+{
+  "type": "personal",
+  "name": "My car",
+  "ownerId": "{{userId}}"
+}
+
+### Create common transport
+POST http://localhost:8080/api/transports
+Content-Type: application/json
+
+{
+  "type": "common",
+  "name": "Our bus",
+  "code": "123"
+}
