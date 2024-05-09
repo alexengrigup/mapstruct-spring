@@ -2,7 +2,7 @@
 POST http://localhost:8080/api/users/tester
 
 > {%
-  client.global.set("userId", response.body);
+  client.global.set("userId", response.body.id);
 %}
 
 ### Create personal transport
