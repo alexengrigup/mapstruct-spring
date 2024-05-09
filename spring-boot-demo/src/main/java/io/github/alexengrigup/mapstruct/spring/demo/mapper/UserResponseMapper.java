@@ -8,8 +8,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(config = SpringMapStructConfig.class)
 public interface UserResponseMapper extends ResponseMapper<User, UserResponse> {
-
     @Override
     UserResponse mapDomainToResponse(User user);
-
 }
