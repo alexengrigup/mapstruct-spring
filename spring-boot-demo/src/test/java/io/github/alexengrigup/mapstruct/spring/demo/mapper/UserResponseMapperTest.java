@@ -17,9 +17,11 @@ class UserResponseMapperTest {
         User domain = User.builder()
                 .id(UUID.randomUUID())
                 .name("Test-user")
+                .idForDictionary(1L)
                 .build();
         UserResponse response = mapper.mapDomainToResponse(domain);
         assertEquals(domain.getId(), response.getId(), "Id");
         assertEquals(domain.getName(), response.getName(), "Name");
+        assertEquals("First", response.getValueFromDictionary(), "ValueFromDictionary");
     }
 }

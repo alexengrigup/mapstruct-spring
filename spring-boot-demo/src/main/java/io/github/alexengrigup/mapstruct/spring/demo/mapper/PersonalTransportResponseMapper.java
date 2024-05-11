@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(config = SpringMapStructConfig.class)
 public interface PersonalTransportResponseMapper extends ResponseMapper<PersonalTransport, PersonalTransportResponse> {
-    @Mapping(target = "ownerId", source = "owner.id")
     @Override
+    @Mapping(target = "ownerId", source = "owner.id")
     PersonalTransportResponse mapDomainToResponse(PersonalTransport personalTransport);
 }
